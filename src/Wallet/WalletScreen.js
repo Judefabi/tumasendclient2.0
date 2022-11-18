@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {Colors} from '../../globals/Globals';
 import image from '../../assets/cardback.jpg';
 import logo from '../../assets/logotuma.png';
@@ -20,43 +20,115 @@ import {paymentMethods} from '../../model/Paymentmethods';
 
 const WalletScreen = () => {
   const navigation = useNavigation();
+  const [hasTumaWallet, setHasTumaWallet] = useState(false);
+
   return (
     <View style={styles.mainContainer}>
-      <TouchableOpacity
-        style={styles.tumaCard}
-        onPress={() => {
-          navigation.navigate('Wallet Transactions');
-        }}>
-        <ImageBackground
-          source={image}
-          resizeMode="cover"
-          style={styles.image}
-          imageStyle={{borderRadius: 10}}>
-          <Text style={styles.walletName}>Tuma Wallet</Text>
-          <Text style={styles.walletBalance}>KES 200.50</Text>
-          <View style={styles.bottomSection}>
-            <View style={{flexDirection: 'column'}}>
-              <Text style={styles.textLogo}>JUDE FABIANO</Text>
-              <View
-                style={{
-                  backgroundColor: '#3C4048',
-                  paddingHorizontal: 15,
-                  borderRadius: 50,
-                }}>
-                <Text style={styles.cardNumber}>**** 3452</Text>
+      {hasTumaWallet ? (
+        <TouchableOpacity
+          style={styles.tumaCard}
+          onPress={() => {
+            navigation.navigate('Wallet Transactions');
+          }}>
+          <ImageBackground
+            source={image}
+            resizeMode="cover"
+            style={styles.image}
+            imageStyle={{borderRadius: 10}}>
+            <Text style={styles.walletName}>Tuma Wallet</Text>
+            <Text style={styles.walletBalance}>KES 200.50</Text>
+            <View style={styles.bottomSection}>
+              <View style={{flexDirection: 'column'}}>
+                <Text style={styles.textLogo}>JUDE FABIANO</Text>
+                <View
+                  style={{
+                    backgroundColor: '#3C4048',
+                    paddingHorizontal: 15,
+                    borderRadius: 50,
+                  }}>
+                  <Text style={styles.cardNumber}>**** 3452</Text>
+                </View>
               </View>
+              <Text style={styles.expiry}>3/29</Text>
             </View>
-            <Text style={styles.expiry}>3/29</Text>
-          </View>
+            <TouchableOpacity
+              style={styles.fundWalletView}
+              onPress={() => {
+                navigation.navigate('Fund Wallet');
+              }}>
+              <Text style={styles.fundWalletText}>Fund Wallet</Text>
+            </TouchableOpacity>
+          </ImageBackground>
+        </TouchableOpacity>
+      ) : (
+        <View>
           <TouchableOpacity
-            style={styles.fundWalletView}
+            style={styles.tumaCard}
             onPress={() => {
-              navigation.navigate('Fund Wallet');
+              hasTumaWallet ? navigation.navigate('Wallet Transactions') : null;
             }}>
-            <Text style={styles.fundWalletText}>Fund Wallet</Text>
+            <ImageBackground
+              source={image}
+              resizeMode="cover"
+              style={styles.image}
+              imageStyle={{borderRadius: 10}}>
+              {/* <Text style={styles.walletName}>Tuma Wallet</Text> */}
+              <Text style={styles.walletBalance}>
+                <Text style={{fontSize: 16}}>KES</Text> 0.00
+              </Text>
+              {hasTumaWallet ? (
+                <View style={styles.bottomSection}>
+                  <View style={{flexDirection: 'column'}}>
+                    <Text style={styles.textLogo}>JUDE FABIANO</Text>
+                    <View
+                      style={{
+                        backgroundColor: '#3C4048',
+                        paddingHorizontal: 15,
+                        borderRadius: 50,
+                      }}>
+                      <Text style={styles.cardNumber}>**** 3452</Text>
+                    </View>
+                  </View>
+                  <Text style={styles.expiry}>3/29</Text>
+                </View>
+              ) : (
+                <View style={styles.bottomSection}>
+                  <View style={{flexDirection: 'column'}}>
+                    <Text style={styles.textLogo}>NOT REGISTERED</Text>
+                    <View
+                      style={{
+                        backgroundColor: '#3C4048',
+                        paddingHorizontal: 15,
+                        borderRadius: 50,
+                      }}>
+                      <Text style={styles.cardNumber}>
+                        Activate to use wallet
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              )}
+              {hasTumaWallet ? (
+                <TouchableOpacity
+                  style={styles.fundWalletView}
+                  onPress={() => {
+                    navigation.navigate('Fund Wallet');
+                  }}>
+                  <Text style={styles.fundWalletText}>Fund Wallet</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.fundWalletView}
+                  onPress={() => {
+                    navigation.navigate('Activate Wallet');
+                  }}>
+                  <Text style={styles.fundWalletText}>Activate Wallet</Text>
+                </TouchableOpacity>
+              )}
+            </ImageBackground>
           </TouchableOpacity>
-        </ImageBackground>
-      </TouchableOpacity>
+        </View>
+      )}
       <View style={styles.paymentMethodsView}>
         <Text style={styles.title}>Payment Methods</Text>
         <FlatList
@@ -86,10 +158,10 @@ const WalletScreen = () => {
           <Ionicons size={25} name="add-outline" />
           <Text style={styles.voucherButtonText}>Add Voucher code</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.voucherButtons}>
+        {/* <TouchableOpacity style={styles.voucherButtons}>
           <Ionicons size={25} name="barcode-outline" />
           <Text style={styles.voucherButtonText}>Win Vouchers</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -201,7 +273,6 @@ const styles = StyleSheet.create({
   paymentCardView: {
     flexDirection: 'row',
     alignItems: 'center',
-    
   },
   vouchersView: {
     paddingHorizontal: 10,

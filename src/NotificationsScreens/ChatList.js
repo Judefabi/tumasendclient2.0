@@ -14,7 +14,7 @@ import auth from '@react-native-firebase/auth';
 
 const ChatList = ({chat, chatId}) => {
   var userId = auth().currentUser.uid;
-  console.log('fetched', chat);
+  // console.log('fetched', chat);
   const navigation = useNavigation();
   const [chatMessages, setChatMessages] = useState();
 

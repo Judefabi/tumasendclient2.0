@@ -8,6 +8,7 @@ import AddPaymentMethod from '../Wallet/AddPaymentMethod';
 import MpesaAccount from '../Wallet/MpesaAccount';
 import VisaAccount from '../Wallet/VisaAccount';
 import Mastercard from '../Wallet/Mastercard';
+import ActivateWallet from '../Wallet/ActivateWallet';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ export default function AccountStack() {
       <Stack.Screen name="Wallet" component={WalletScreen} />
       <Stack.Screen name="Wallet Transactions" component={WalletTransactions} />
       <Stack.Screen name="Fund Wallet" component={FundWallet} />
+      <Stack.Screen name="Activate Wallet" component={ActivateWallet} />
       <Stack.Screen name="Add Payment" component={AddPaymentMethod} />
       <Stack.Screen name="Mpesa" component={MpesaAccount} />
       <Stack.Screen name="Visa" component={VisaAccount} />
