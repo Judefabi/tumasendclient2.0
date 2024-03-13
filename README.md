@@ -41,7 +41,7 @@
 
 ## About The Project
 
-![Screen Shot](images/tumasend.png)
+![Screen Shot](tumasend.png)
 
 Tumasend is a personal project for a delivery application allowing businesses to easily deliver packages to their clients utilizing the vast transport network. Like a taxi-hailing app, the businesses can request a delivery vehicle through the client app and will be linked automatically to a nearby rider who will through the rider’s app facilitate deliveries to the customer. This is a cost-effective way as it uses distance to calculate delivery fees as opposed to the constant fees used by freight companies. The app also allows in-app chats between clients and riders for efficient deliveries. The app makes use of Google Firebase for real-time chats and tracking and Google maps for location and map directions.
 
