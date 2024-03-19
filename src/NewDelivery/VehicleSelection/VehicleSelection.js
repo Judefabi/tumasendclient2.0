@@ -24,7 +24,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Lottie from 'lottie-react-native';
 import firestore from '@react-native-firebase/firestore';
 
-const GOOGLE_MAPS_APIKEY = 'AIzaSyAka7sIWrqMO568WM1X97LMQjHDLOCOo6c';
+const GOOGLE_MAPS_APIKEY = 'YOUR_API_KEY';
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
 
